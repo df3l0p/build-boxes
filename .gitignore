@@ -1,0 +1,9 @@
+.vscode
+output
+logs
+packer_cache
+res/vagrantfile/.vagrant
+# Make sure the logs directory exists with the .keep
+logs/[^.]*
+*.box
+*.pyc

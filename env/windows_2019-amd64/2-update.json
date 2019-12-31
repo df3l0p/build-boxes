@@ -1,0 +1,45 @@
+{
+    "variables": {
+        "provider": "virtualbox",
+        "vm_name": "windows_2019-amd64",
+        "winrm_username": "vagrant",
+        "winrm_password": "vagrant"
+    },
+    "builders": [
+        {
+            "name": "{{user `vm_name`}}-{{user `provider`}}",
+            "vm_name": "packer-{{user `vm_name`}}",
+            "type": "virtualbox-ovf",
+            "source_path": "output/{{user `provider`}}/{{user `vm_name`}}/1/packer-{{user `vm_name`}}.ovf",
+            "guest_additions_mode": "attach",
+            "vboxmanage": [
+                ["modifyvm", "{{.Name}}", "--memory", "4096"],
+                ["modifyvm", "{{.Name}}", "--cpus", "2"],
+                ["modifyvm", "{{.Name}}", "--vram", "64"],
+                ["modifyvm", "{{.Name}}", "--audio", "none"],
+                ["modifyvm", "{{.Name}}", "--nictype1", "82540EM"],
+                ["modifyvm", "{{.Name}}", "--nictype2", "82540EM"],
+                ["modifyvm", "{{.Name}}", "--nictype3", "82540EM"],
+                ["modifyvm", "{{.Name}}", "--nictype4", "82540EM"],
+                ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"]
+            ],
+            "headless": true,
+            "communicator": "winrm",
+            "winrm_username": "{{user `winrm_username`}}",
+            "winrm_password": "{{user `winrm_password`}}",
+            "winrm_timeout": "12h",
+            "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+            "shutdown_timeout": "1h",
+            "output_directory": "./output/{{user `provider`}}/{{user `vm_name`}}/2/"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "powershell",
+            "script": "res/scripts/Repair-WindowsUpdates.ps1"
+        },
+        {
+            "type": "windows-update"
+        }
+    ]
+}

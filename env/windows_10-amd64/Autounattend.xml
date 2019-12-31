@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <servicing/>
+    <settings pass="windowsPE">
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <DiskConfiguration>
+                <Disk wcm:action="add">
+                    <CreatePartitions>
+                        <CreatePartition wcm:action="add">
+                            <Order>1</Order>
+                            <Type>Primary</Type>
+                            <Extend>true</Extend>
+                        </CreatePartition>
+                    </CreatePartitions>
+                    <ModifyPartitions>
+                        <ModifyPartition wcm:action="add">
+                            <Extend>false</Extend>
+                            <Format>NTFS</Format>
+                            <Letter>C</Letter>
+                            <Order>1</Order>
+                            <PartitionID>1</PartitionID>
+                            <Label>Windows 10</Label>
+                        </ModifyPartition>
+                    </ModifyPartitions>
+                    <DiskID>0</DiskID>
+                    <WillWipeDisk>true</WillWipeDisk>
+                </Disk>
+                <WillShowUI>OnError</WillShowUI>
+            </DiskConfiguration>
+            <UserData>
+                <AcceptEula>true</AcceptEula>
+                <FullName>Vagrant</FullName>
+                <Organization>Vagrant</Organization>
+
+                <!--
+                    NOTE: If you are re-configuring this for use of a retail key
+                    and using a retail ISO, you need to adjust the <ProductKey> block
+                    below to look like this:
+
+                    <ProductKey>
+                        <Key>W269N-WFGWX-YVC9B-4J6C9-T83GX</Key>
+                        <WillShowUI>Never</WillShowUI>
+                    </ProductKey>
+
+                    Notice the addition of the `<Key>` element.
+                -->
+
+                <!-- Product Key from http://technet.microsoft.com/en-us/library/jj612867.aspx -->
+                <ProductKey>NPPR9-FWDCX-D2C8J-H872K-2YT43
+                    <WillShowUI>Never</WillShowUI>
+                </ProductKey>
+            </UserData>
+            <ImageInstall>
+                <OSImage>
+                    <InstallTo>
+                        <DiskID>0</DiskID>
+                        <PartitionID>1</PartitionID>
+                    </InstallTo>
+                    <WillShowUI>OnError</WillShowUI>
+                    <InstallToAvailablePartition>false</InstallToAvailablePartition>
+                    <InstallFrom>
+                        <MetaData wcm:action="add">
+                            <Key>/IMAGE/NAME</Key>
+                            <Value>Windows 10 Enterprise Evaluation</Value>
+                        </MetaData>
+                    </InstallFrom>
+                </OSImage>
+            </ImageInstall>
+        </component>
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <SetupUILanguage>
+                <UILanguage>en-US</UILanguage>
+            </SetupUILanguage>
+            <InputLocale>fr-CH</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback>en-US</UILanguageFallback>
+            <UserLocale>en-US</UserLocale>
+        </component>
+    </settings>
+    <settings pass="offlineServicing">
+        <component name="Microsoft-Windows-LUA-Settings" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <EnableLUA>false</EnableLUA>
+        </component>
+    </settings>
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <InputLocale>fr-CH</InputLocale><!-- https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-vista/cc766400(v=ws.10) - 0409:0000100c -->
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UserLocale>en-US</UserLocale>
+        </component>
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <UserAccounts>
+                <AdministratorPassword>
+                    <Value>dgBhAGcAcgBhAG4AdABBAGQAbQBpAG4AaQBzAHQAcgBhAHQAbwByAFAAYQBzAHMAdwBvAHIAZAA=</Value>
+                    <PlainText>false</PlainText>
+                </AdministratorPassword>
+                <LocalAccounts>
+                    <LocalAccount wcm:action="add">
+                        <Password>
+                            <Value>dgBhAGcAcgBhAG4AdABQAGEAcwBzAHcAbwByAGQA</Value>
+                            <PlainText>false</PlainText>
+                        </Password>
+                        <Description>Vagrant</Description>
+                        <DisplayName>Vagrant</DisplayName>
+                        <Group>Administrators</Group>
+                        <Name>vagrant</Name>
+                    </LocalAccount>
+                </LocalAccounts>
+            </UserAccounts>
+            <OOBE>
+                <HideEULAPage>true</HideEULAPage>
+                <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+                <NetworkLocation>Home</NetworkLocation>
+                <ProtectYourPC>1</ProtectYourPC>
+            </OOBE>
+            <AutoLogon>
+                <Password>
+                    <Value>dgBhAGcAcgBhAG4AdABQAGEAcwBzAHcAbwByAGQA</Value>
+                    <PlainText>false</PlainText>
+                </Password>
+                <Username>vagrant</Username>
+                <Enabled>true</Enabled>
+            </AutoLogon>
+            <FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <Order>1</Order>
+                    <CommandLine>PowerShell "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
+                    <Description>Change the default PowerShell Execution Policy from Restricted to RemoteSigned</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>2</Order>
+                    <CommandLine>C:\Windows\SysWOW64\cmd /c PowerShell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
+                    <Description>Change the default PowerShell (32-bit) Execution Policy from Restricted to RemoteSigned</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>3</Order>
+                    <CommandLine>PowerShell -File a:\Setup-Winrm.ps1</CommandLine>
+                </SynchronousCommand>
+            </FirstLogonCommands>
+        </component>
+    </settings>
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <OEMInformation>
+                <HelpCustomized>false</HelpCustomized>
+            </OEMInformation>
+            <!-- Rename computer here. -->
+            <ComputerName>vagrant-10</ComputerName>
+            <TimeZone>Pacific Standard Time</TimeZone>
+            <RegisteredOwner/>
+        </component>
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Security-SPP-UX" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <SkipAutoActivation>true</SkipAutoActivation>
+        </component>
+    </settings>
+    <cpi:offlineImage xmlns:cpi="urn:schemas-microsoft-com:cpi" cpi:source="catalog:d:/sources/install_windows 7 ENTERPRISE.clg"/>
+</unattend>
