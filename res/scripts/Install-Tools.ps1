@@ -33,6 +33,8 @@ Param(
         #"ghidra",
         #"visualstudiocommunity2013",
         #"windbg",
+        "mingw",
+        "cygwin --parms /InstallDir:C:\tools\cygwin",
         "officeproplus2013"
         ),
     $srvTools = @(
