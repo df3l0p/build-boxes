@@ -137,8 +137,8 @@ Function Unlock-WindowsWithW4RH4WK
     if ($os -notlike "*Windows 10*") {
         $scripts = @(
             "block-telemetry.ps1",
-            "optimize-user-interface.ps1",
-            "remove-default-apps.ps1"
+            "optimize-user-interface.ps1"
+            #"remove-default-apps.ps1",
         )
     }
     # If hyperv is the hypervisor, then we do not debloat windows (things might be broken)
@@ -198,4 +198,5 @@ Disable-Hibernation
 Set-PowerPlanToHighPerformance
 Disable-BootManager
 Unlock-WindowsWithW4RH4WK
-Unlock-WindowsWithSycnex
+# todo: bug Removing CloudStore from registry if it exists. ERROR: Cannot convert the "Explorer.exe" value of type "System.String" to type "System.Diagnostics.Process".
+#Unlock-WindowsWithSycnex
