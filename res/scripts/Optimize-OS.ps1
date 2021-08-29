@@ -197,6 +197,7 @@ Disable-IPv6
 Disable-Hibernation
 Set-PowerPlanToHighPerformance
 Disable-BootManager
-Unlock-WindowsWithW4RH4WK
+# ERROR EXCEPTION:  ERROR EXCEPTION:    at System.Management.Automation.MshCommandRuntime.ThrowTerminatingError(ErrorRecord errorRecord)
+#Unlock-WindowsWithW4RH4WK
 # todo: bug Removing CloudStore from registry if it exists. ERROR: Cannot convert the "Explorer.exe" value of type "System.String" to type "System.Diagnostics.Process".
 #Unlock-WindowsWithSycnex
