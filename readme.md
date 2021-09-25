@@ -23,7 +23,7 @@ This project has only been tested on Ubuntu Linux host machine.
   * Virtualbox (the only supported at the moment)
 * packer - https://www.packer.io/
 * packer plugin
-  * Windows update - https://github.com/rgl/packer-provisioner-windows-update
+  * Windows update - https://github.com/rgl/packer-provisioner-windows-update. Instructions [here](https://www.packer.io/docs/plugins)
 * vagrant - https://www.vagrantup.com/
 
 ## Installation
@@ -32,7 +32,8 @@ The use `build-boxes`, you need to install the python depedencies. They can easi
 
 ```
 git clone https://github.com/df3l0p/build-boxes.git
-python3 -m pipenv install
+python3 -m pipenv install                           # for python 3.6
+python3 -m pipenv install --path=/usr/bin/python3.8 # For python>3.6
 ```
 
 To switch in the pipenv environment
